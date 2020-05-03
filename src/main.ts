@@ -1,11 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { async } from 'rxjs/internal/scheduler/async';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common/interfaces';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix("api");
+
+  app.useGlobalPipes(new ValidationPipe());
 
   addSwagggerDocumentation(app);
 
@@ -14,7 +18,7 @@ async function bootstrap() {
 
 bootstrap();
 
-async function addSwagggerDocumentation(app :INestApplication){
+async function addSwagggerDocumentation(app: INestApplication) {
   const options = new DocumentBuilder()
     .setTitle('Search entities')
     .setVersion('1.0')

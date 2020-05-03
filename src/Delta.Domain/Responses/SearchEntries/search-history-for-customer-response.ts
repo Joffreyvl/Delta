@@ -1,10 +1,9 @@
 export class SearchHistoryForCustomerResponse {
-    constructor(searches: SearchEntryDto[]) { };
+
+    constructor(public searches: Array<SearchEntryDto>) { }
 }
 
 export class SearchEntryDto {
-    constructor(
-        public coinId: number,
-        public searchDate: Date,
-    ) { }
+    public coinId: number;
+    public searchDate: Date;
 }

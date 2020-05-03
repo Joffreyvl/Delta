@@ -1,11 +1,8 @@
 export class TrendingCoinsResponse {
-    constructor(trendingSearches: TrendingSearchEntries[]) { };
+    constructor(trendingSearches: Array<TrendingCoin>) { };
 }
 
-export class TrendingSearchEntries {
-    constructor(
-        public coinId: number,
-        public searchDate: Date,
-        public numberOfSearches: number
-    ) { }
+export class TrendingCoin {
+    public coinId: number;
+    public numberOfSearches: number;
 }

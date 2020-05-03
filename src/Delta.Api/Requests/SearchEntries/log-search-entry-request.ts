@@ -1,5 +1,9 @@
+import { IsNotEmpty, IsDate, IsNumber } from 'class-validator';
+
 export class LogSearchEntryRequest {
-  customerId: number;
+  @IsNotEmpty()
   coinId: number;
-  searchDate: Date;
+  
+  @IsNotEmpty()
+  searchDate: Date = new Date();
 }

@@ -6,6 +6,7 @@ import { LogSearchEntryRequest } from 'src/Delta.Api/Requests/SearchEntries/log-
 import { SearchEntrieMapper } from 'src/Delta.Api/Mappers/SearchEntries/search-entrie-mapper';
 import { TrendingCoinsResponse } from 'src/Delta.Domain/Responses/SearchEntries/trending-coins-response';
 import { SearchHistoryForCustomerResponse } from 'src/Delta.Domain/Responses/SearchEntries/search-history-for-customer-response';
+import { SearchEntry } from 'src/Delta.Domain/Models/search-entry';
 
 @Controller('search-entries')
 export class SearchEntriesController {
@@ -13,27 +14,28 @@ export class SearchEntriesController {
     constructor(
         private queryBus: QueryBus,
         private commandBus: CommandBus,
-        private mapper: SearchEntrieMapper,
+        private mapper: SearchEntrieMapper
     ) { }
 
-    @Get(":id")
-    getTopNLastSearchedCoinsForCustomer(@Param() params, range: number): SearchHistoryForCustomerResponse {
-        let query = new GetSearchHistoryForCustomerQuery(params.id, range)
+    @Get("trending")
+    async getTopNTrendingCoins(): Promise<TrendingCoinsResponse> {
+        let query = new GetTrendingCoinsQuery(100)
 
-        return this.queryBus.execute(query);
+        return await this.queryBus.execute(query);
     }
 
-    @Get()
-    getTopNTrendingCoins(range: number): TrendingCoinsResponse {
-        let query = new GetTrendingCoinsQuery(range)
+    @Get(":id")
+    async getTopNLastSearchedCoinsForCustomer(@Param("id") id: number): Promise<SearchHistoryForCustomerResponse> {
+        let query = new GetSearchHistoryForCustomerQuery(id, 100)
 
-        return this.queryBus.execute(query);
+        return await this.queryBus.execute(query);
     }
 
     @Post(":id")
-    upsertLogEntry(@Param() params, @Body() request: LogSearchEntryRequest) {
+    async upsertLogEntry(@Param("id") id, @Body() request: LogSearchEntryRequest): Promise<SearchEntry> {
         let cmd = this.mapper.requestToCommand(request);
+        cmd.customerId = id;
 
-        return this.commandBus.execute(cmd);
+        return await this.commandBus.execute(cmd);
     }
 }
