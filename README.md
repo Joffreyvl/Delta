@@ -6,8 +6,8 @@ Route : /api/search-entries/:id - POST
 
 ```
 {
-	"coinId" :"",
-	"searchDate" :"04-16-2020"
+	"coinId" :"4565468",
+	"searchDate" :"2020-05-02T18:04:21+02:00"
 } 
 ```
 ## Get search history for customer
