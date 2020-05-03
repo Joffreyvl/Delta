@@ -1,7 +1,7 @@
-import { GetSearchHistoryForCustomerQuery } from './get-search-history-for-customer-query';
+// import { GetSearchHistoryForCustomerQuery } from './get-search-history-for-customer-query';
 
-describe('GetSearchHistoryForCustomerQuery', () => {
-  it('should be defined', () => {
-    expect(new GetSearchHistoryForCustomerQuery()).toBeDefined();
-  });
-});
+// describe('GetSearchHistoryForCustomerQuery', () => {
+//   it('should be defined', () => {
+//     expect(new GetSearchHistoryForCustomerQuery()).toBeDefined();
+//   });
+// });
