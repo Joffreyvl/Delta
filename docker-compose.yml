@@ -1,0 +1,28 @@
+version: "3"
+services:
+    delta-mysql:
+        image: "mysql:8"
+        container_name: delta-mysql
+        volumes:
+            - delta-mysql:/var/lib/mysql
+        ports:
+            - 3307:3306
+        expose: 
+            - 3307
+        environment:
+            MYSQL_USER: delta
+            MYSQL_ROOT_PASSWORD: test123
+            MYSQL_DATABASE: delta
+
+    delta-backend:
+        build: ./
+        container_name: delta-backend
+        environment:
+            - DB_SERVER=delta-backend
+        ports:
+            - 3000:3000
+        expose:
+            - 3000
+
+volumes:
+    delta-mysql:
