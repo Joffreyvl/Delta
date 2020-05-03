@@ -11,7 +11,11 @@ Route : /api/search-entries/:id - POST
 } 
 ```
 ## Get search history for customer
+```
 Route : /api/search-entries/:id - GET
+```
 
 # Get trending coins
+```
 Route : /api/search-entries/trending - GET
+```
